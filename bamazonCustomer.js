@@ -20,7 +20,7 @@ function shop() {
 
 function displayInventory () {
     console.log('----------------------------------------------------');
-    console.log('|  ID  |  Price  |             Product             |');
+    console.log('|  ID  |  Price $ |      Product                   |');
     console.log('----------------------------------------------------');
 
     _connection.query("SELECT item_id, product_name, department_name, price, stock_quantity FROM products", function(err, rows, fields) {
@@ -40,7 +40,7 @@ function takeOrder() {
         {
             type: "input",
             name: "product",
-            message: "What would you like to purchase?",
+            message: "Which product would you like to purchase? Enter item ID number.",
         }
     ]).then(function(answers) {
         _selectedProductId = answers.product;
@@ -96,9 +96,9 @@ function fulfillOrder() {
 
 function displayInvoice() {
     console.log("Your invoice");
-    console.log("------------------------------------------------------------");
-    console.log("|   ID |  Qty | Total   |     Product             |");
-    console.log("-------------------------------------------------------------");
+    console.log("---------------------------------------------------");
+    console.log("|   ID |   Qty | Total $ |   Product              |");
+    console.log("---------------------------------------------------");
 
     _connection.query("SELECT item_id, product_name, department_name, price, stock_quantity from products WHERE item_id = " 
         + _selectedProductId, function(err, rows, fields) {
